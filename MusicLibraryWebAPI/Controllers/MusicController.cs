@@ -58,7 +58,7 @@ namespace MusicLibraryWebAPI.Controllers
         {
             try
             {
-                var updateInfo = _context.Songs.Where(u => u.Id == id).FirstOrDefault();
+                //var updateInfo = _context.Songs.Where(u => u.Id == id).FirstOrDefault();
                 _context.Songs.Update(song);
                 _context.SaveChanges();
                 return Ok();
