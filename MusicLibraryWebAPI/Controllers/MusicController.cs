@@ -37,12 +37,11 @@ namespace MusicLibraryWebAPI.Controllers
 
         // POST api/<MusicController>
         [HttpPost] //insert/add
-        public IActionResult Post([FromBody] Song music)
+        public IActionResult Post([FromBody] Song song)
         {
-            Song song = new Song();
             try
             {
-                _context.Songs.Add(music);
+                _context.Songs.Add(song);
                 _context.SaveChanges();
 
                 return CreatedAtAction(nameof(Get), new{ id = song.Id}, song); // return a 201 status
@@ -59,6 +58,7 @@ namespace MusicLibraryWebAPI.Controllers
         {
             try
             {
+                var updateInfo = _context.Songs.Where(u => u.Id == id).FirstOrDefault();
                 _context.Songs.Update(song);
                 _context.SaveChanges();
                 return Ok();
