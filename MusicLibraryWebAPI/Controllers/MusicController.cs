@@ -21,23 +21,18 @@ namespace MusicLibraryWebAPI.Controllers
         }
         // GET: api/<MusicController>
         [HttpGet]
-        public IActionResult Get(int id)
+        public IActionResult Get()
         {
-            var song = _context.Songs.Where(s => s.Id == id);
-            if (song == null)
-            {
-                return NotFound();
-            }
-            return Ok(song);
+            var songList = _context.Songs.ToList();
+            return Ok(songList);
         }
 
         //GET api/<MusicController>/5
         [HttpGet("{id}")]
-        public IActionResult Get() // get all the song list
+        public IActionResult Get(int id) // get all the song list
         {
-            var songList = _context.Songs.ToList();
-            return Ok(songList);
-            //return "value";
+            var song = _context.Songs.Where(s => s.Id == id);
+            return Ok(song);
         }
 
         // POST api/<MusicController>
@@ -74,13 +69,14 @@ namespace MusicLibraryWebAPI.Controllers
 
         // DELETE api/<MusicController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Song id)
+        public IActionResult Delete(int id)
         {
             try
             {
-                _context.Songs.Remove(id);
+                var deleteinfo = _context.Songs.Where(d => d.Id == id).FirstOrDefault();
+                _context.Remove(deleteinfo);
                 _context.SaveChanges();
-                return Ok();
+                return Ok(deleteinfo);
             }
             catch (Exception err)
             {
