@@ -39,13 +39,15 @@ namespace MusicLibraryWebAPI.Controllers
         [HttpPost] //insert/add
         public IActionResult Post([FromBody] Song music)
         {
+            Song song = new Song();
             try
             {
                 _context.Songs.Add(music);
                 _context.SaveChanges();
-                return Ok();
+
+                return CreatedAtAction(nameof(Get), new{ id = song.Id}, song); // return a 201 status
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 return BadRequest(err);
             }
