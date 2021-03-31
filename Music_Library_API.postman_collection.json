@@ -124,6 +124,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GET LIST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44344/api/music",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"api",
+						"music"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
