@@ -43,7 +43,7 @@ namespace MusicLibraryWebAPI.Controllers
                 _context.SaveChanges();
                 return Ok();
             }
-            catch
+            catch(Exception err)
             {
                 return BadRequest();
             }
@@ -53,12 +53,23 @@ namespace MusicLibraryWebAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<MusicController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(Song id)
         {
+            try
+            {
+                _context.Songs.Remove(id);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception err)
+            {
+                return BadRequest();            
+            }
         }
     }
 }

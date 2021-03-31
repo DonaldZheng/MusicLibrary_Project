@@ -20,8 +20,10 @@ namespace MusicLibraryWebAPI.Migrations
 
             modelBuilder.Entity("MusicLibraryWebAPI.Models.Song", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Album")
                         .HasColumnType("nvarchar(max)");

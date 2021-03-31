@@ -9,7 +9,7 @@ using MusicLibraryWebAPI.Data;
 namespace MusicLibraryWebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210330182936_Initial")]
+    [Migration("20210331142720_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,8 +22,10 @@ namespace MusicLibraryWebAPI.Migrations
 
             modelBuilder.Entity("MusicLibraryWebAPI.Models.Song", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Album")
                         .HasColumnType("nvarchar(max)");

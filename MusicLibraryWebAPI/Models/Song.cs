@@ -9,7 +9,7 @@ namespace MusicLibraryWebAPI.Models
     public class Song
     {
         [Key]
-        public string Id
+        public int Id
         {
             get; set;
         }
