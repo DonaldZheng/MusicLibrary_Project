@@ -26,15 +26,17 @@ namespace MusicLibraryWebAPI.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<MusicController>/5
+        //GET api/<MusicController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(Song id)
         {
-            return "value";
+            var songId = _context.Songs.Find(id);
+            //return songId;
+            //return "value";
         }
 
         // POST api/<MusicController>
-        [HttpPost]
+        [HttpPost] //insert/add
         public IActionResult Post([FromBody] Song music)
         {
             try
@@ -45,15 +47,24 @@ namespace MusicLibraryWebAPI.Controllers
             }
             catch(Exception err)
             {
-                return BadRequest();
+                return BadRequest(err);
             }
         }
 
         // PUT api/<MusicController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id}")] //edit/updates existing record
+        public IActionResult Put(int id, [FromBody] Song song)
         {
-
+            try
+            {
+                _context.Songs.Update(song);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception err)
+            {
+                return BadRequest(err);
+            }
         }
 
         // DELETE api/<MusicController>/5
@@ -68,7 +79,7 @@ namespace MusicLibraryWebAPI.Controllers
             }
             catch (Exception err)
             {
-                return BadRequest();            
+                return BadRequest(err);            
             }
         }
     }
